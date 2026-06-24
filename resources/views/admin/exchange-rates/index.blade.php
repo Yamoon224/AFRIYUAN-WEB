@@ -56,7 +56,7 @@
                     <td class="px-4 py-3 font-mono text-gray-600">{{ number_format($rate->rate, 6) }}</td>
                     <td class="px-4 py-3 font-mono font-semibold text-primary-600">{{ number_format($rate->margin_rate, 6) }}</td>
                     <td class="px-4 py-3 text-gray-500">{{ $rate->margin_percent }}%</td>
-                    <td class="px-4 py-3 text-xs text-gray-400">{{ $rate->updated_at->diffForHumans() }}</td>
+                    <td class="px-4 py-3 text-xs text-gray-400">{{ $rate->fetched_at?->diffForHumans() ?? '—' }}</td>
                     <td class="px-4 py-3">
                         <form method="POST" action="{{ route('admin.exchange-rates.destroy', $rate->id) }}"
                               onsubmit="return confirm('Supprimer ce taux ?')">

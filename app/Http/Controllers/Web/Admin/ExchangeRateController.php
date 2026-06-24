@@ -16,7 +16,7 @@ class ExchangeRateController extends Controller
     {
         $rates       = ExchangeRate::orderBy('from_currency')->get();
         $fees        = TransferFee::orderBy('from_currency')->get();
-        $lastUpdated = ExchangeRate::latest('updated_at')->value('updated_at');
+        $lastUpdated = ExchangeRate::latest('fetched_at')->value('fetched_at');
 
         return view('admin.exchange-rates.index', compact('rates', 'fees', 'lastUpdated'));
     }
@@ -38,7 +38,8 @@ class ExchangeRateController extends Controller
                 'rate'           => $data['rate'],
                 'margin_rate'    => $marginRate,
                 'margin_percent' => $data['margin_percent'],
-                'expires_at'     => now()->addYears(10), // Manuel → pas d'expiration automatique
+                'fetched_at'     => now(),
+                'expires_at'     => now()->addYears(10),
             ]
         );
 

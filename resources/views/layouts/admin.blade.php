@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin') — AfriYuan Backoffice</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
@@ -15,7 +17,7 @@
 
 {{-- Admin sidebar --}}
 <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-       class="fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 text-white flex flex-col transition-transform duration-300 lg:translate-x-0 lg:static lg:flex">
+       class="fixed inset-y-0 left-0 z-30 w-64 bg-gray-900 text-white flex flex-col transition-transform duration-300 lg:translate-x-0">
 
     <div class="h-16 flex items-center gap-3 px-5 border-b border-gray-700 shrink-0">
         <div class="w-9 h-9 bg-primary-500 rounded-xl flex items-center justify-center">

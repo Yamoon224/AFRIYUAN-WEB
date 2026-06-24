@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Red rounded square background -->
+  <rect width="32" height="32" rx="7" fill="#DC2626"/>
+  <!-- Gold inner glow accent -->
+  <rect x="1" y="1" width="30" height="30" rx="6" fill="none" stroke="#F59E0B" stroke-width="0.5" opacity="0.4"/>
+  <!-- "AY" lettering -->
+  <text
+    x="16" y="23"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif"
+    font-weight="900"
+    font-size="15"
+    letter-spacing="-0.5"
+    fill="#FFFFFF">AY</text>
+</svg>
