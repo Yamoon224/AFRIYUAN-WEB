@@ -47,7 +47,7 @@ class AuthController extends Controller
             'last_name'          => 'required|string|max:100',
             'email'              => 'required|email|unique:users,email',
             'country_id'         => 'required|exists:countries,id',
-            'phone_country_code' => 'required|string|max:5',
+            'phone_country_code' => 'nullable|string|max:5',
             'phone_number'       => 'required|string|max:20',
             'date_of_birth'      => 'required|date|before:-18 years',
             'nationality'        => 'nullable|string|max:100',
@@ -55,12 +55,20 @@ class AuthController extends Controller
             'terms'              => 'accepted',
         ]);
 
+        // Dial codes fallback si le champ readonly n'a pas été soumis
+        $dialCodes = [
+            'CI' => '+225', 'GN' => '+224', 'SN' => '+221', 'GH' => '+233',
+            'GA' => '+241', 'LR' => '+231', 'SL' => '+232', 'GW' => '+245', 'CN' => '+86',
+        ];
+        $country     = Country::find($data['country_id']);
+        $phoneCode   = $data['phone_country_code'] ?: ($dialCodes[$country->code] ?? '');
+
         $user = User::create([
             'first_name'    => $data['first_name'],
             'last_name'     => $data['last_name'],
             'email'         => $data['email'],
             'country_id'    => $data['country_id'],
-            'phone_number'  => $data['phone_country_code'] . $data['phone_number'],
+            'phone_number'  => $phoneCode . $data['phone_number'],
             'date_of_birth' => $data['date_of_birth'],
             'nationality'   => $data['nationality'] ?? null,
             'password'      => Hash::make($data['password']),
