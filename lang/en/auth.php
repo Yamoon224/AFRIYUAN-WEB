@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'login'                  => 'Login',
+    'register'               => 'Register',
+    'logout'                 => 'Logout',
+    'email'                  => 'Email address',
+    'password'               => 'Password',
+    'confirm_password'       => 'Confirm password',
+    'remember_me'            => 'Remember me',
+    'forgot_password'        => 'Forgot your password?',
+    'reset_password'         => 'Reset password',
+    'first_name'             => 'First name',
+    'last_name'              => 'Last name',
+    'phone'                  => 'Phone number',
+    'already_have_account'   => 'Already have an account?',
+    'no_account'             => 'No account yet?',
+    'create_account'         => 'Create account',
+    'verify_otp'             => 'Verify OTP code',
+    'resend_otp'             => 'Resend code',
+    'otp_sent'               => 'A verification code has been sent to your phone.',
+    'failed'                 => 'These credentials do not match our records.',
+    'throttle'               => 'Too many login attempts. Please try again in :seconds seconds.',
+    'send_reset_link'        => 'Send reset link',
+    'back_to_login'          => 'Back to login',
+];

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -95,6 +96,21 @@ class User extends Authenticatable
     public function supportTickets(): HasMany
     {
         return $this->hasMany(SupportTicket::class);
+    }
+
+    public function wallet(): HasOne
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    public function sentInternalTransfers(): HasMany
+    {
+        return $this->hasMany(InternalTransfer::class, 'sender_id');
+    }
+
+    public function receivedInternalTransfers(): HasMany
+    {
+        return $this->hasMany(InternalTransfer::class, 'receiver_id');
     }
 
     public function isKycApproved(): bool

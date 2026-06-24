@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'login'                  => 'Connexion',
+    'register'               => 'Inscription',
+    'logout'                 => 'Déconnexion',
+    'email'                  => 'Adresse email',
+    'password'               => 'Mot de passe',
+    'confirm_password'       => 'Confirmer le mot de passe',
+    'remember_me'            => 'Se souvenir de moi',
+    'forgot_password'        => 'Mot de passe oublié ?',
+    'reset_password'         => 'Réinitialiser le mot de passe',
+    'first_name'             => 'Prénom',
+    'last_name'              => 'Nom de famille',
+    'phone'                  => 'Numéro de téléphone',
+    'already_have_account'   => 'Déjà un compte ?',
+    'no_account'             => 'Pas encore de compte ?',
+    'create_account'         => 'Créer un compte',
+    'verify_otp'             => 'Vérifier le code OTP',
+    'resend_otp'             => 'Renvoyer le code',
+    'otp_sent'               => 'Un code de vérification a été envoyé à votre téléphone.',
+    'failed'                 => 'Identifiants incorrects.',
+    'throttle'               => 'Trop de tentatives. Réessayez dans :seconds secondes.',
+    'send_reset_link'        => 'Envoyer le lien de réinitialisation',
+    'back_to_login'          => 'Retour à la connexion',
+];

@@ -4,10 +4,12 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\BeneficiaryController;
 use App\Http\Controllers\Web\CardController;
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\InternalTransferController;
 use App\Http\Controllers\Web\KycController;
 use App\Http\Controllers\Web\NotificationController;
 use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\TransferController;
+use App\Http\Controllers\Web\WalletController;
 use App\Http\Controllers\Web\PasswordResetController;
 use App\Http\Controllers\Web\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Web\Admin\ExchangeRateController as AdminExchangeRate;
@@ -16,6 +18,14 @@ use App\Http\Controllers\Web\Admin\SettingsController as AdminSettings;
 use App\Http\Controllers\Web\Admin\TransactionController as AdminTransaction;
 use App\Http\Controllers\Web\Admin\UserController as AdminUser;
 use Illuminate\Support\Facades\Route;
+
+// ─── Language switch ─────────────────────────────────────────────────────────
+Route::post('/language/{locale}', function (string $locale) {
+    if (in_array($locale, ['fr', 'en'])) {
+        session(['locale' => $locale]);
+    }
+    return back();
+})->name('language.switch');
 
 // ─── Public routes (no auth required) ────────────────────────────────────────
 Route::get('/confidentialite', fn() => view('legal.privacy'))->name('privacy');
@@ -84,6 +94,20 @@ Route::middleware('auth')->group(function () {
         Route::get('/',           [NotificationController::class, 'index'])->name('index');
         Route::post('/{id}/read', [NotificationController::class, 'markRead'])->name('markRead');
         Route::post('/read-all',  [NotificationController::class, 'markAllRead'])->name('markAllRead');
+    });
+
+    // Wallet
+    Route::prefix('wallet')->name('wallet.')->group(function () {
+        Route::get('/',          [WalletController::class, 'index'])->name('index');
+        Route::post('/topup',    [WalletController::class, 'topUp'])->name('topup');
+        Route::post('/withdraw', [WalletController::class, 'withdraw'])->name('withdraw');
+    });
+
+    // Internal transfers
+    Route::prefix('virement-interne')->name('internal-transfers.')->group(function () {
+        Route::get('/',                [InternalTransferController::class, 'create'])->name('create');
+        Route::post('/',               [InternalTransferController::class, 'store'])->name('store');
+        Route::get('/search',          [InternalTransferController::class, 'searchRecipient'])->name('search');
     });
 
     Route::get('/support/nouveau', fn() => view('support.create'))->name('support.create');

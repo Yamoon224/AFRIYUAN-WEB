@@ -85,4 +85,19 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::post('/photo',   'App\Http\Controllers\Api\V1\ProfileController@updatePhoto');
         Route::put('/pin',      'App\Http\Controllers\Api\V1\ProfileController@updatePin');
     });
+
+    // Wallet
+    Route::prefix('wallet')->group(function () {
+        Route::get('/',              'App\Http\Controllers\Api\V1\WalletController@show');
+        Route::get('/transactions',  'App\Http\Controllers\Api\V1\WalletController@transactions');
+        Route::post('/topup',        'App\Http\Controllers\Api\V1\WalletController@topUp');
+        Route::post('/withdraw',     'App\Http\Controllers\Api\V1\WalletController@withdraw');
+    });
+
+    // Internal transfers
+    Route::prefix('internal-transfers')->group(function () {
+        Route::get('/',                 'App\Http\Controllers\Api\V1\InternalTransferController@index');
+        Route::post('/',                'App\Http\Controllers\Api\V1\InternalTransferController@store');
+        Route::get('/search-recipient', 'App\Http\Controllers\Api\V1\InternalTransferController@searchRecipient');
+    });
 });
