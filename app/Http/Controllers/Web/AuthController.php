@@ -64,14 +64,15 @@ class AuthController extends Controller
         $phoneCode   = $data['phone_country_code'] ?: ($dialCodes[$country->code] ?? '');
 
         $user = User::create([
-            'first_name'    => $data['first_name'],
-            'last_name'     => $data['last_name'],
-            'email'         => $data['email'],
-            'country_id'    => $data['country_id'],
-            'phone_number'  => $phoneCode . $data['phone_number'],
-            'date_of_birth' => $data['date_of_birth'],
-            'nationality'   => $data['nationality'] ?? null,
-            'password'      => Hash::make($data['password']),
+            'first_name'         => $data['first_name'],
+            'last_name'          => $data['last_name'],
+            'email'              => $data['email'],
+            'country_id'         => $data['country_id'],
+            'phone_country_code' => $phoneCode,
+            'phone_number'       => $data['phone_number'],
+            'date_of_birth'      => $data['date_of_birth'],
+            'nationality'        => $data['nationality'] ?? null,
+            'password'           => Hash::make($data['password']),
         ]);
 
         $this->otpService->generateAndSend($user);
