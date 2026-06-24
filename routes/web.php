@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\ProfileController;
 use App\Http\Controllers\Web\TransferController;
 use App\Http\Controllers\Web\WalletController;
 use App\Http\Controllers\Web\PasswordResetController;
+use App\Http\Controllers\Web\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Web\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Web\Admin\ExchangeRateController as AdminExchangeRate;
 use App\Http\Controllers\Web\Admin\KycController as AdminKyc;
@@ -114,7 +115,16 @@ Route::middleware('auth')->group(function () {
 });
 
 // ─── Admin routes ─────────────────────────────────────────────────────────────
-Route::middleware(['auth', 'can:admin-access'])->prefix('admin')->name('admin.')->group(function () {
+
+// Admin guest routes (not authenticated)
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login',  [AdminAuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('login.submit');
+    Route::post('/logout',[AdminAuthController::class, 'logout'])->name('logout');
+});
+
+// Admin protected routes
+Route::middleware('auth.admin')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
 
